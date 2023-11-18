@@ -1,0 +1,20 @@
+{
+  "dialogueList": [
+    {
+      "name": "Coco",
+      "text": "Hey Player,its Coco, glad to see you back on the track, its been a long time coming."
+    },
+    {
+      "name": "Coco",
+      "text": "Choosing the Checkpoint race? good option, see you on the track."
+    },
+    {
+      "name": "NARRATOR",
+      "text": "This is the checkpoint racetrack, try to capture all the checkpoints in the given time."
+    },
+    {
+      "name": "NARRATOR",
+      "text": "Use WASD to move. Good luck driver."
+    }
+  ]
+}

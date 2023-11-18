@@ -1,0 +1,20 @@
+{
+  "dialogueList": [
+    {
+      "name": "Coco",
+      "text": "Hey Player,its Coco, glad to see you back on the track, its been a long time coming."
+    },
+    {
+      "name": "Coco",
+      "text": "YES! , I can't wait for this. Hope you've got your best engine in."
+    },
+    {
+      "name": "NARRATOR",
+      "text": "This is the Advanced racetrack, this is where you relly test your skills as a Hoverdriver, race to the end and finish in first place."
+    },
+    {
+      "name": "NARRATOR",
+      "text": "Use WASD to move. Good luck driver."
+    }
+  ]
+}
