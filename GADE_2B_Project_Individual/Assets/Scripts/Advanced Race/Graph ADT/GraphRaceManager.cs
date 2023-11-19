@@ -108,7 +108,7 @@ public class GraphRaceManager : MonoBehaviour
         {
             players.Add(new Node<GameObject>(aiRacer));
         }
-       players.Add(new Node<GameObject>(currentPlayer.Value));
+//       players.Add(new Node<GameObject>(currentPlayer.Value));
 
         for (int i = 0; i < players.Count; i++)
         {
