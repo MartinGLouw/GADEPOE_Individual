@@ -5,7 +5,7 @@ public class SFXManager : MonoBehaviour
 {
     public static SFXManager instance;
     public List<AudioClip> clips;
-    private Dictionary<string, AudioSource> audioSources;
+    public Dictionary<string, AudioSource> audioSources;
 
     void Awake()
     {

@@ -6,17 +6,17 @@ using System.Collections;
 public class GraphRaceManager : MonoBehaviour
 {
     public Node<GameObject> currentPlayer;
+    public GameObject currentPlayerInspector;
     public List<Node<GameObject>> waypoints;
     public TextMeshProUGUI currentPlayerPositionText;
     public TextMeshProUGUI PlayerPositionTextEnd;
-
     private List<Node<GameObject>> players;
     private Dictionary<Node<GameObject>, Node<GameObject>> playerWaypoints;
     private Dictionary<Node<GameObject>, float> playerDistancesToNextWaypoint;
     private List<int> playerRankings;
-
     void Start()
     {
+        currentPlayer = new Node<GameObject>(currentPlayerInspector);
         players = new List<Node<GameObject>>();
         playerWaypoints = new Dictionary<Node<GameObject>, Node<GameObject>>();
         playerDistancesToNextWaypoint = new Dictionary<Node<GameObject>, float>();
@@ -24,14 +24,12 @@ public class GraphRaceManager : MonoBehaviour
 
         StartCoroutine(InitializeRaceManager());
     }
-
     void Update()
     {
         UpdatePlayerRankings();
         UpdatePlayerPositionUI();
         UpdatePlayerWaypointsAndDistances();
     }
-
     void UpdatePlayerWaypointsAndDistances()
     {
         for (int i = 0; i < players.Count; i++)
@@ -39,7 +37,6 @@ public class GraphRaceManager : MonoBehaviour
             GraphMoveTo mover = players[i].Value.GetComponent<GraphMoveTo>();
             if (mover != null)
             {
-                
                 if (playerWaypoints.ContainsKey(players[i]) && playerDistancesToNextWaypoint.ContainsKey(players[i]))
                 {
                     playerWaypoints[players[i]] = mover.CurrentWaypoint;
@@ -48,14 +45,12 @@ public class GraphRaceManager : MonoBehaviour
             }
         }
     }
-
     void UpdatePlayerRankings()
     {
         playerRankings.Sort((a, b) =>
         {
-            
             if (playerWaypoints.ContainsKey(players[a]) && playerWaypoints.ContainsKey(players[b]) 
-                && playerDistancesToNextWaypoint.ContainsKey(players[a]) && playerDistancesToNextWaypoint.ContainsKey(players[b]))
+                                                        && playerDistancesToNextWaypoint.ContainsKey(players[a]) && playerDistancesToNextWaypoint.ContainsKey(players[b]))
             {
                 int waypointComparison = System.Collections.Generic.Comparer<Node<GameObject>>.Default.Compare(playerWaypoints[players[b]], playerWaypoints[players[a]]);
                 if (waypointComparison != 0)
@@ -69,8 +64,8 @@ public class GraphRaceManager : MonoBehaviour
             }
             return 0;
         });
+    
     }
-
     void UpdatePlayerPositionUI()
     {
         int currentPlayerIndex = players.IndexOf(currentPlayer);
@@ -79,7 +74,6 @@ public class GraphRaceManager : MonoBehaviour
         currentPlayerPositionText.text = positionText;
         PlayerPositionTextEnd.text = ("You finished " + positionText + "!");
     }
-
     string GetSuffix(int number)
     {
         int lastDigit = number % 10;
@@ -98,18 +92,17 @@ public class GraphRaceManager : MonoBehaviour
         }
         return "th";
     }
-
     IEnumerator InitializeRaceManager()
     {
         yield return new WaitForSeconds(0.5f);
-
         GameObject[] aiRacers = GameObject.FindGameObjectsWithTag("AIRacer");
+        Debug.Log("Found " + aiRacers.Length + " AI racers");
         foreach (var aiRacer in aiRacers)
         {
             players.Add(new Node<GameObject>(aiRacer));
         }
-//       players.Add(new Node<GameObject>(currentPlayer.Value));
-
+        Debug.Log("Found " + players.Count + " players");
+        players.Add(currentPlayer);
         for (int i = 0; i < players.Count; i++)
         {
             GraphMoveTo mover = players[i].Value.GetComponent<GraphMoveTo>();
@@ -120,6 +113,5 @@ public class GraphRaceManager : MonoBehaviour
             }
             playerRankings.Add(i);
         }
-    }
-
+    }// whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 }
